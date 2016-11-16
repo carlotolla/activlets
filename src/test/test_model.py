@@ -35,7 +35,6 @@ class IssueTest(unittest.TestCase):
     def setUp(self):
         self.caretaker = MagicMock(name="caretaker")
         keys = "number, title, body, user, labels, milestone, state, size, assignee".split(", ")
-        self.façade = Facade()
         Facade().use_with_caution_empty_facade_model()
 
         self.issue0 = {key: key+"0" for key in keys}
@@ -73,8 +72,8 @@ class IssueTest(unittest.TestCase):
 
     def _test_facade_manage_issue(self, project="test", **kwargs):
         """insere e recupera issue"""
-        proj = self.façade.insert_project(project)
-        return proj, self.façade.insert_issue(project, **kwargs)
+        proj = Facade().insert_project(project)
+        return proj, Facade().insert_issue(project, **kwargs)
 
     def test_facade_manage_issue(self):
         """insere e recupera issue"""
@@ -116,13 +115,13 @@ class IssueTest(unittest.TestCase):
     def test_control_fill_with_data(self):
         """le do github e escreve no modelo"""
         mc = MainControl()
-        self.assertIsNotNone(self.façade.retrieve_project("eica"), "MainControl failed to create eica")
+        self.assertIsNotNone(Facade().retrieve_project("eica"), "MainControl failed to create eica")
         mg, mm = self._mock_github()
         mc.fill_with_data(reader=mg)
         print(mm.call_count)
         mg.get_user.assert_called_once_with("labase")
         mg.get_repo.assert_called_once_with("eica")
-        issue = self.façade.retrieve_issue("eica", "2016")
+        issue = Facade().retrieve_issue("eica", "2016")
         self.assertIsNotNone(issue, "Facade failed to index issue")
         self.assertEqual(issue.milestone, "issue.milestone")
 
@@ -144,12 +143,12 @@ class IssueTest(unittest.TestCase):
 
             return Any()
         mc = MainControl()
-        project = self.façade.retrieve_project("eica")
+        project = Facade().retrieve_project("eica")
         self.assertIsNotNone(project, "MainControl failed to create eica")
         mgtk, visitor = self._mock_gtk_writer()
         mc.fill_with_data(reader=self._mock_github()[0])
         mc.render_data_to_gui(writer=mgtk)
-        issue = self.façade.retrieve_issue("eica", "2016")
+        issue = Facade().retrieve_issue("eica", "2016")
         mgtk.visit.assert_any_call(issue)
         mgtk.visit.assert_any_call(project)
         self.assertEqual(2, mgtk.visit.call_count)
