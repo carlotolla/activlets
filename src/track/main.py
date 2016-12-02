@@ -84,6 +84,7 @@ class Handler:
         cr.paint()
         cr.set_source_rgb(0, 0, 0)
         cr.set_line_width(0.5)
+        self.track_scan(cr)
 
         for i in self.coords:
             for j in self.coords:
@@ -111,13 +112,17 @@ class Handler:
 
             self.image.queue_draw()
 
-    def track_scan(self):
+    def track_scan(self, cr):
         tolerance, xr, xg, xb = \
-            self.track.min, self.track.min_color.red, self.track.min_color.green, self.track.min_color.blue
+            self.track.min.value, self.track.min_color.red, self.track.min_color.green, self.track.min_color.blue
         for y in range(200, 600):
             for x in range(200):
                 r, g, b = [self.pixarray[int(x * self.offset.x + channel + y * self.offset.y)] for channel in (0, 1, 2)]
                 match = abs(xr - r) < tolerance and abs(xg - g) < tolerance and abs(xb - b) < tolerance
+                if match:
+                    cr.move_to(x-1, y)
+                    cr.line_to(x, y)
+                    cr.stroke()
 
 
 def update_image(image_area, data=None):

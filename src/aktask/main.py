@@ -21,10 +21,7 @@
 O módulo aktask propõe um modelo de acesso a atividades ligadas a issues do github.
 
 """
-
-from github import Github
 import gi
-import os
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, Gio
 
@@ -77,10 +74,20 @@ class MainWindow(Gtk.Window):
 
 
 class GtkIssue(Gtk.Box):
-    def __init__(self, title="", number=0, **kwargs):
+    def __init__(self, title="", number=0, labels=[], state="pendente", **kwargs):
         super(GtkIssue, self).__init__(orientation=Gtk.Orientation.VERTICAL, border_width=3)
+        label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         lbl = Gtk.Label("%s - %d" % (title, number), xalign=0.0)
-        self.pack_start(lbl, False, False, 0)
+
+        self.pack_start(label_box, False, False, 0)
+        label_box.pack_start(lbl, False, False, 0)
+        for label in labels:
+            lb = Gtk.Label(" %s " % label, xalign=0.0)
+            label_box.pack_start(lb, False, False, 0)
+
+        stat = Gtk.Label(" %s " % state, xalign=0.0)
+
+        label_box.pack_start(stat, False, False, 0)
         self.progress = Gtk.ProgressBar()
         self.pack_start(self.progress, False, False, 0)
 
@@ -102,7 +109,8 @@ class Visitor:
         model.retrieve(self)
 
 if __name__ == '__main__':
-    from aktask.control import MainControl
+    # from aktask.control import MainControl
+    from aktask.activ_factory import MainControl
     control = MainControl()
     control.fill_with_data()
     win = MainWindow()
