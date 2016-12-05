@@ -1,0 +1,10 @@
+/* Make some things rounded */
+  .aklabel {
+    border-radius: 8;
+    border-style: solid;
+    border-width: 1;
+    border-color: darker (@selected_fg_color);
+    background-color: lighter (rgba (50%, 32%, 35%, 0.9));
+    margin: 8px;
+    padding: 1px 5px 1px 5px;
+  }
