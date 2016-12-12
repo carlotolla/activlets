@@ -1,10 +1,106 @@
 /* Make some things rounded */
   .aklabel {
-    border-radius: 8;
+    border-radius: 8px;
     border-style: solid;
-    border-width: 1;
+    border-width: 1px;
     border-color: darker (@selected_fg_color);
     background-color: lighter (rgba (50%, 32%, 35%, 0.9));
+    margin: 8px;
+    padding: 1px 5px 1px 5px;
+  }
+ .akissue {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .aksize {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: lighter (rgba (90%, 80%, 90%, 0.9));
+    background-color: darker (rgba (10%, 15%, 10%, 0.9));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .akpend {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: darker (rgba (10%, 20%, 20%, 0.9));
+    background-color: lighter (rgba (90%, 10%, 10%, 0.6));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .akpend {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: darker (rgba (10%, 20%, 20%, 0.9));
+    background-color: lighter (rgba (90%, 10%, 10%, 0.6));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .akready {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: darker (rgba (10%, 10%, 20%, 0.9));
+    background-color: lighter (rgba (90%, 90%, 10%, 0.6));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .akgo {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: darker (rgba (20%, 10%, 20%, 0.9));
+    background-color: lighter (rgba (10%, 90%, 10%, 0.6));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .akpause {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: darker (rgba (10%, 15%, 20%, 0.9));
+    background-color: lighter (rgba (90%, 40%, 20%, 0.6));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+ .akstop {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    color: darker (rgba (10%, 10%, 20%, 0.9));
+    background-color: lighter (rgba (10%, 30%, 60%, 0.6));
+    margin: 2px;
+    padding: 0px 1px 2px 1px;
+  }
+  .akmilestone {
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    background-color: navajowhite;
+    margin: 8px;
+    padding: 1px 5px 1px 5px;
+  }
+  .akencarregado {
+    border-radius: 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background-image:  url("http://activufrj.nce.ufrj.br/photo/carlo?size=P");
     margin: 8px;
     padding: 1px 5px 1px 5px;
   }

@@ -66,7 +66,8 @@ class Project:
 
 
 class Issue:
-    def __init__(self, number=0, title="", body="", user="", labels="", milestone="", state=0, size=0, assignee=None):
+    def __init__(self, number=0, title="", body="", user="", labels="", milestone="", state=0,
+                 size=0, deadline="asap", assignee=None):
         """
         Atividade programada para um projeto.
 
@@ -81,10 +82,12 @@ class Issue:
         :param assignee: Responsáveis pela execução
         """
         self.body = body
-        self.number, self.title, self.user, self.labels, self.milestone, self.state, self.size, self.assignee =\
-            number, title, user, labels, milestone, state, size, assignee
+        self.number, self.title, self.user, self.labels, self.milestone, self.state, self.size, \
+            self.deadline, self.assignee = \
+            number, title, user, labels, milestone, state, size, deadline, assignee
 
-    def update(self, number=0, title="", body="", user="", labels="", milestone="", state=0, size=0, assignee=None):
+    def update(self, number=0, title="", body="", user="", labels="", milestone="", state=0,
+               size=0, deadline="asap", assignee=None):
         """
         Atividade programada para um projeto.
 
@@ -96,10 +99,11 @@ class Issue:
         :param milestone: Descrição da versão a que pertence
         :param state: Condição atual da atividade
         :param size: Tamanho em unidades de tempo
+        :param deadline: Data prevista para a conclusão
         :param assignee: Responsáveis pela execução
         """
         self.body = body
-        self.number, self.title, self.user, self.labels, self.milestone, self.state, self.size, self.assignee =\
+        self.number, self.title, self.user, self.labels, self.milestone, self.state, self.size, self.assignee = \
             number or self.number, title or self.title, user or self.user, labels or self.labels, \
             milestone or self.milestone, state or self.state, size or self.size, assignee or self.assignee
 
@@ -146,6 +150,7 @@ class Facade:
 
         def accept(self, visitor):
             [model.accept(visitor) for model in self.model.values()]
+
     __instance = None
 
     @classmethod

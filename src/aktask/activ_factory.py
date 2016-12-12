@@ -5,7 +5,7 @@ O módulo aktask propõe um modelo de acesso a atividades ligadas a issues do gi
 
 import requests
 import keyring
-from aktask.model import Facade
+from model import Facade
 
 
 class MainControl:
@@ -28,10 +28,11 @@ class MainControl:
         print(issues.text)
         issues = issues.json()['atividades']
 
-        for id, issue in enumerate(issues):
-            Facade().insert_issue("labase", number=id, title=issue['titulo'], body='',
-                                  labels=['@%s' % issue['data_pendent'][:10]] + [enc for enc in issue['encarregados']],
-                                  milestone=issue['grupo'],
+        for oid, issue in enumerate(issues):
+            Facade().insert_issue("labase", number=oid, title=issue['titulo'], body='',
+                                  labels=['@%s' % issue['data_pendent'][:10]],
+                                  milestone=issue['grupo'], deadline=issue['deadline'],
+                                  assignee=issue['encarregados'],
                                   state=issue['status'], size=0)
 ISSUES = {
     'atividades': [
@@ -70,13 +71,13 @@ ISSUES = {
          'group_id': 'f4a5afee1f6a4f56bdabcaae7e033dbd', 'apagar': True, 'encarregados': ['carlo'],
          'data_pendent': '21/11/2016 16:36', 'deadline': '', 'id': '9e02e301ff2f43adae539b8e65045b8d',
          'titulo': 'Página Activ', 'alterar': True, 'data_start': '', 'data_end': '', 'prioritario': 'N',
-         'status': 'pendente', 'data_ready': ''}, {'grupo': 'IGames Antigos', 'data_sort': '2016-11-21 16:37:00.000000',
-                                                   'group_id': 'f4a5afee1f6a4f56bdabcaae7e033dbd', 'apagar': True,
-                                                   'encarregados': ['carlo'], 'data_pendent': '21/11/2016 16:37',
-                                                   'deadline': '', 'id': '621baac521ad4fe2bdad54960cec1c32',
-                                                   'titulo': 'FavIcon Arukas', 'alterar': True, 'data_start': '',
-                                                   'data_end': '', 'prioritario': 'N', 'status': 'pendente',
-                                                   'data_ready': ''},
+         'status': 'pendente', 'data_ready': ''},
+        {'grupo': 'IGames Antigos', 'data_sort': '2016-11-21 16:37:00.000000',
+         'group_id': 'f4a5afee1f6a4f56bdabcaae7e033dbd', 'apagar': True,
+         'encarregados': ['carlo'], 'data_pendent': '21/11/2016 16:37',
+         'deadline': '', 'id': '621baac521ad4fe2bdad54960cec1c32',
+         'titulo': 'FavIcon Arukas', 'alterar': True, 'data_start': '',
+         'data_end': '', 'prioritario': 'N', 'status': 'pendente', 'data_ready': ''},
         {'grupo': 'Graduação', 'data_sort': '', 'group_id': '49354c180d4849cab5dc125d52548448', 'apagar': True,
          'encarregados': '', 'data_pendent': '', 'deadline': '', 'id': '', 'titulo': '', 'alterar': True,
          'data_start': '', 'data_end': '', 'prioritario': '', 'status': '', 'data_ready': ''},
