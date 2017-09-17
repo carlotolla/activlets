@@ -42,6 +42,9 @@ class Feature:
             for postfix in ",_color".split(",") for suffix in "min max".split() ]
         self.min_color = self.color_min.get_rgba()
         self.max_color = self.color_max.get_rgba()
+from enum import Enum
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GdkPixbuf
 
 
 class Handler:
@@ -63,6 +66,9 @@ class Handler:
         # self.pixbuf = self.image.get_pixbuf()
         self.pixarray = self.pixbuf.get_pixels()
         self.coords = []
+        self.image = builder.get_object("image1")
+        self.pixbuf = self.image.get_pixbuf()
+        self.pixarray = self.pixbuf.get_pixels()
 
         class Offset:
             y = self.pixbuf.get_rowstride()
@@ -94,6 +100,15 @@ class Handler:
                 cr.stroke()
 
         del self.coords[:]
+
+    def onDeleteWindow(self, *args):
+        Gtk.main_quit(*args)
+        sys.exit(0)
+
+    def onButtonPressed(self, button):
+        print("Hello World!")
+
+    def image_click(self, event, view=None):
         pass
 
     def on_image_click(self, target, event, view=None):
